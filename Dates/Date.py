@@ -40,6 +40,61 @@ class Date():
         elif self.year % 4 == 0: return True
         return False
 
+    def copy(self):
+        """ Returns a new object with the same month, day, year
+        as the calling object (self).
+        """
+        dnew = Date(self.month, self.day, self.year)
+        return dnew
+
+    def equals(self, d2):
+        """ Decides if self and d2 represent the same calendar date,
+            whether or not they are the in the same place in memory.
+        """
+        if self.year == d2.year and self.month == d2.month and self.day == d2.day:
+            return True
+        else:
+            return False
+
+    def tomorrow(self):
+        leapYear = self.isLeapYear()
+        fdays = 0
+        if leapYear:
+            fdays = 29
+        else:
+            fdays = 28
+        dim = [0,31,fdays,31,30,31,30,31,31,30,31,30,31]
+        monthDays = dim[self.month]
+        if self.month == 12 and self.day == 31:
+            self.month = 1
+            self.day = 1
+            self.year += 1
+        elif self.day == monthDays:
+            self.month += 1
+            self.day = 1
+        else:
+            self.day += 1
+
+    def yesterday(self):
+        leapYear = self.isLeapYear()
+        fdays = 0
+        if leapYear:
+            fdays = 29
+        else:
+            fdays = 28
+        dim = [0,31,fdays,31,30,31,30,31,31,30,31,30,31]
+        monthDays = dim[self.month]
+        if self.month == 1 and self.day == 1:
+            self.year -= 1
+            self.month = 12
+            self.day = 31
+        elif self.day == 1:
+            self.month -=1
+            self.day = monthDays
+
 my = Date(3,8,2016)
-my.isLeapYear()
-print my
+my2 =  my.copy()
+my3 = my.isLeapYear()
+my4 = my.equals(my2)
+my5 = my.tomorrow()
+print (my5)
