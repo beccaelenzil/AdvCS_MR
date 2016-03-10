@@ -11,11 +11,12 @@ class Date():
     """
 
     # the constructor is always named __init__ !
-    def __init__(self, month, day, year):
+    def __init__(self, month, day, year, daysAdded):
         """ the constructor for objects of type Date """
         self.month = month
         self.day = day
         self.year = year
+        self.daysAdded = daysAdded
 
 
     # the "printing" function is always named __repr__ !
@@ -91,10 +92,40 @@ class Date():
         elif self.day == 1:
             self.month -=1
             self.day = monthDays
+        else:
+            self.day -= 1
 
-my = Date(3,8,2016)
-my2 =  my.copy()
-my3 = my.isLeapYear()
-my4 = my.equals(my2)
-my5 = my.tomorrow()
-print (my5)
+
+    def addNDays(self):
+        days = self.daysAdded
+        for i in range(0, days):
+            self.tomorrow()
+
+    def subNDays(self):
+        days = self.daysAdded
+        for i in range (0, days):
+            self.yesterday()
+
+    def isBefore(self, d):
+        if d.year > self.year:
+            return False
+        elif d.month > self.month and d.year == self.year:
+            return False
+        elif d.month > self.month and d.year == self.year:
+            return False
+        elif d.month == self.month:
+            if d.day > self.day:
+                return False
+            else:
+                return True
+        elif d.month < self.month:
+            return True
+
+    #def diff(self, d2, d3 , d4):
+
+
+
+my = Date(3,8,2016,5)
+my2 = Date(2,20,2016,5)
+my5 = my.isBefore(my2)
+print my5
