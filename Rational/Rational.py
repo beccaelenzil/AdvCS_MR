@@ -7,13 +7,20 @@ class Rational:
         return str(self.numerator)+"/"+str(self.denominator)
 
     def simplify(self):
-        """
-        This method should return the rational number in simplest for in place.
-        For example, if r = Rational(10,20), after calling r.simplify(), r should be equal to Rational(1,2)
-        """
+        if "." not in str(self.numerator) and "." not in str(self.denominator):
+            a = min(self.numerator, self.denominator)
+            for n in range (a, 1, -1):
+                if self.denominator%a == 0 and self.numerator%a == 0:
+                    self.numerator /= n
+                    self.denominator /=n
+                    break
+        else:
+            return "Not a valid input!"
 
+
+print "." not in str(3.14)
 
 #Test simplify
-r = Rational(10,20)
-r.simplify()
-print r
+r = Rational(3.14,3.14)
+a = r.simplify()
+print a
