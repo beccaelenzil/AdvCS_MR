@@ -6,6 +6,9 @@ class Rational:
     def __repr__(self):
         return str(self.numerator)+"/"+str(self.denominator)
 
+    # You're missing a number of methods
+    # https://www.cs.hmc.edu/csforall/OOPs/oops.html#overloading
+
     def simplify(self):
         if "." not in str(self.numerator) and "." not in str(self.denominator):
             a = min(self.numerator, self.denominator)
