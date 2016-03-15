@@ -4,20 +4,20 @@
 #
 # Name:
 #
+import time
 
 class Date():
     """ a user-defined data structure that
         stores and manipulates dates
     """
 
+
     # the constructor is always named __init__ !
-    def __init__(self, month, day, year, daysAdded):
+    def __init__(self, month, day, year):
         """ the constructor for objects of type Date """
         self.month = month
         self.day = day
         self.year = year
-        self.daysAdded = daysAdded
-
 
     # the "printing" function is always named __repr__ !
     def __repr__(self):
@@ -96,13 +96,13 @@ class Date():
             self.day -= 1
 
 
-    def addNDays(self):
-        days = self.daysAdded
+    def addNDays(self, d2):
+        days = d2
         for i in range(0, days):
             self.tomorrow()
 
-    def subNDays(self):
-        days = self.daysAdded
+    def subNDays(self, d2):
+        days = d2
         for i in range (0, days):
             self.yesterday()
 
@@ -111,21 +111,71 @@ class Date():
             return False
         elif d.month > self.month and d.year == self.year:
             return False
-        elif d.month > self.month and d.year == self.year:
-            return False
-        elif d.month == self.month:
-            if d.day > self.day:
-                return False
-            else:
+        if d.year == self.year:
+            if d.month == self.month:
+                if d.day > self.day:
+                    return False
+                else:
+                    return True
+            elif d.month < self.month:
                 return True
-        elif d.month < self.month:
+
+    def isAfter(self, d):
+        if d.year > self.year:
             return True
+        elif d.month < self.month and d.year == self.year:
+            return False
+        if d.year == self.year:
+            if d.month == self.month:
+                if d.day < self.day:
+                    return False
+                else:
+                    return True
+            elif d.month > self.month:
+                return True
 
-    #def diff(self, d2, d3 , d4):
+    def diff (self, d2):
+        beforeBool = self.isBefore(d2)
+        afterBool = self.isAfter(d2)
+        counterInt = 0
+        #t1 = time.clock()
+        if beforeBool:
+            counterInt = 0
+            keepCounting = True
+            while (keepCounting):
+                if self.isBefore(d2):
+                    self.yesterday()
+                    counterInt += 1
+                else:
+                    keepCounting = False
+                    counterInt -= 1
+        elif afterBool:
+            counterInt = 0
+            keepCounting = True
+            while (keepCounting):
+                if self.isAfter(d2):
+                    self.tomorrow()
+                    counterInt += 1
+                else:
+                    keepCounting = False
+                    counterInt -= 1
+
+        else:
+            counterInt = 0
+        t2 = time.clock()
+       ## print t2 - t1
+        return counterInt
 
 
 
-my = Date(3,8,2016,5)
-my2 = Date(2,20,2016,5)
-my5 = my.isBefore(my2)
-print my5
+
+
+
+
+my = Date(3,15,2012)
+my2 = Date(4,14,2015)
+my3 = Date(3,14,2016).diff(Date(3,14,2017))
+my4 = Date(3,14,2016).diff(Date(3,14,2116))
+my5 = Date(3,14,2012)
+print my5.diff(my)
+#print my2
