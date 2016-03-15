@@ -7,3 +7,4 @@ while True:
     rate(60)
     myBox.rotate(angle=pi/100)
 
+# complete the exercise that includes multiple boxes
