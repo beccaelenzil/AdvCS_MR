@@ -64,13 +64,13 @@ class Board:
         nextCh = 'X'
         for colString in moveString:
             col = int(colString)
-            if 0 <= col <= self.width:
+            if 0 <= col < self.width:
                 self.addMove(col, nextCh)
             if nextCh == 'X': nextCh = 'O'
             else: nextCh = 'X'
 
     def allowsMove(self, c):
-        if c <= self.width:
+        if 0 <= c <= self.width:
             counterVar = 0
             for i in range(self.height):
                 mySpace = self.data[i][c]
@@ -101,6 +101,7 @@ class Board:
                # print counterVar
         if counterVar <= self.height:
             self.data[self.height - counterVar][c] = ' '
+
     def turn (self):
         user_input = input("What is your guess?")
 
@@ -116,16 +117,59 @@ class Board:
                    D[row][col+2] == ox and \
                    D[row][col+3] == ox:
                     return True
+                    break
+                #else:
+                    #return False
+        #check for vertical wins
         for row in range(0,H-3):
             for col in range (0,W):
-                
+                if D[row][col] == ox and D[row+1][col] == ox and D[row+2][col] == ox and D[row+3][col] == ox:
+                    return True
+                    break
+                #else:
+                    #return False
+        # check for diagonal wins with a positive slope
+        for row in range (0, H-3):
+            for col in range (0, W-3):
+                if D[row][col] == ox and D[row+1][col+1] == ox and D[row+2][col+2] == ox and D[row+3][col+3] == ox:
+                    return True
+                    break
+                #else:
+                    #return False
+        for row in range (H-1, 2, -1):
+            for col in range (0, W-3):
+                if D[row][col] == ox and D[row-1][col+1] == ox and D[row-2][col+2] == ox and D[row-3][col+3] == ox:
+                    return True
+                    break
+
+    def hostGame(self):
+        hasWon = False
+        while (hasWon == False):
+            users_col = -1
+            while self.allowsMove( users_col ) == False:
+                users_col = input("X, choose a column: ")
+            self.addMove(users_col, 'X')
+            print "X's choice: " + str(users_col)
+            print self
+            xWins = self.winsFor('X')
+            if xWins:
+                hasWon == True
+                print "X has won!"
+                break
+            users_col = -1
+            while self.allowsMove( users_col ) == False:
+                users_col = input("O, choose a column: ")
+            self.addMove(users_col, 'O')
+            print "O's choice: " + str(users_col)
+            print self
+            OWins = self.winsFor('O')
+            if OWins:
+                hasWon == True
+                print "O has won!"
+                break
 
 
-
-
-my = Board(2,2)
-my.addMove(1, 'X')
-my.delMove(1)
+my = Board(7,6)
+my.hostGame()
 #my.addMove(9, 'O')
 #my.addMove(9, 'X')
-print my
