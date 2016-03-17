@@ -107,75 +107,103 @@ class Date():
             self.yesterday()
 
     def isBefore(self, d):
-        if d.year > self.year:
-            return False
-        elif d.month > self.month and d.year == self.year:
-            return False
-        if d.year == self.year:
-            if d.month == self.month:
-                if d.day > self.day:
-                    return False
-                else:
-                    return True
-            elif d.month < self.month:
-                return True
+        """
+        return true if self if before d
+        """
 
-    def isAfter(self, d):
         if d.year > self.year:
             return True
-        elif d.month < self.month and d.year == self.year:
-            return False
-        if d.year == self.year:
+        #elif d.month > self.month and d.year == self.year:
+        #    return False
+        elif d.year == self.year:
             if d.month == self.month:
-                if d.day < self.day:
-                    return False
-                else:
+                if d.day > self.day:
                     return True
+                else:
+                    return False
             elif d.month > self.month:
                 return True
+            else:
+                return False
+        else:
+            return False
+
+    def isAfter(self, d):
+        """
+        return true if self if after d
+        """
+        if d.year < self.year:
+            return True
+        #elif d.month < self.month and d.year == self.year:
+        #    return False
+
+        elif d.year == self.year:
+            if d.month == self.month:
+                if d.day < self.day:
+                    return True
+                else:
+                    return False
+            elif d.month < self.month:
+                return True
+            else:
+                return False
+        else:
+            return False
 
     def diff (self, d2):
-        beforeBool = self.isBefore(d2)
-        afterBool = self.isAfter(d2)
+
+        # make a copy of the two days
+        refDay = self.copy()
+        day2 = d2.copy()
+
+        # True if refDay is before day2
+        beforeBool = refDay.isBefore(day2)
+
+        # True if refDay is after day2
+        afterBool = refDay.isAfter(day2)
+
         counterInt = 0
-        #t1 = time.clock()
+        keepCounting = True
+
         if beforeBool:
             counterInt = 0
             keepCounting = True
-            while (keepCounting):
-                if self.isBefore(d2):
-                    self.yesterday()
-                    counterInt += 1
-                else:
-                    keepCounting = False
-                    counterInt -= 1
+            while refDay.isBefore(day2):#keepCounting:
+                #if refDay.isBefore(day2):
+                counterInt += 1
+                refDay.tomorrow()
+                #else:
+                #    #keepCounting = False
+                #   counterInt -= 1
+            return counterInt
         elif afterBool:
             counterInt = 0
-            keepCounting = True
-            while (keepCounting):
-                if self.isAfter(d2):
-                    self.tomorrow()
-                    counterInt += 1
-                else:
-                    keepCounting = False
-                    counterInt -= 1
+            #keepCounting = True
+            while refDay.isAfter(day2):#keepCounting:
+                #if refDay.isAfter(day2):
+                refDay.yesterday()
+                counterInt -= 1
+               #else:
+                    #keepCounting = False
+                    #counterInt -= 1
+            return counterInt
 
-        else:
-            counterInt = 0
-        t2 = time.clock()
-       ## print t2 - t1
-        return counterInt
+        #return counterInt
 
-
-
-
-
-
-
+"""
 my = Date(3,15,2012)
 my2 = Date(4,14,2015)
 my3 = Date(3,14,2016).diff(Date(3,14,2017))
 my4 = Date(3,14,2016).diff(Date(3,14,2116))
 my5 = Date(3,14,2012)
-print my5.diff(my)
-#print my2
+"""
+firstDay = Date(3,15,2012)
+secondDay = Date(4,15,2013)
+
+# your isBefore and isAfter methods weren't working correctly, so I made changes to these and added a docstring explaining what they do
+# your diff is still off by one day, I'll leave that for you to fix!
+
+print secondDay.diff(firstDay)
+print firstDay.diff(secondDay)
+
+
