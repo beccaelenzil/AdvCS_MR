@@ -277,7 +277,7 @@ class Date():
         #return counterInt
 
 
-firstDay = Date(11,12,2014)
+firstDay = Date(11,13,2014)
 secondDay = Date(3,16,2012)
 
 # your isBefore and isAfter methods weren't working correctly, so I made changes to these and added a docstring explaining what they do
