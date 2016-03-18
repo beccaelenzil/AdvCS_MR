@@ -150,6 +150,7 @@ class Date():
         else:
             return False
 
+<<<<<<< Updated upstream
     def diff (self, d2):
 
         # make a copy of the two days
@@ -178,6 +179,79 @@ class Date():
             return counterInt
         elif afterBool:
             counterInt = 0
+=======
+<<<<<<< HEAD
+    def diff(self, d2):
+        beforeBool = self.isBefore(d2)
+        afterBool = self.isAfter(d2)
+        counterInt = 0
+        print "counterInt"
+        #t1 = time.clock()
+        if beforeBool:
+            counterInt = 0
+            keepCounting = True
+            while (keepCounting):
+                if self.isBefore(d2):
+                    self.yesterday()
+                    counterInt += 1
+
+                else:
+                    keepCounting = False
+                    counterInt -= 1
+        elif afterBool:
+            counterInt = 0
+            keepCounting = True
+            while (keepCounting):
+                if self.isAfter(d2):
+                    self.tomorrow()
+                    counterInt += 1
+                    print counterInt
+                else:
+                    keepCounting = False
+                    counterInt -= 1
+
+        #else:
+        #    counterInt = 0
+        t2 = time.clock()
+       ## print t2 - t1
+        return counterInt
+
+
+
+
+
+
+
+=======
+    def diff (self, d2):
+
+        # make a copy of the two days
+        refDay = self.copy()
+        day2 = d2.copy()
+
+        # True if refDay is before day2
+        beforeBool = refDay.isBefore(day2)
+
+        # True if refDay is after day2
+        afterBool = refDay.isAfter(day2)
+
+        counterInt = 0
+        keepCounting = True
+
+        if beforeBool:
+            counterInt = 0
+            keepCounting = True
+            while refDay.isBefore(day2):#keepCounting:
+                #if refDay.isBefore(day2):
+                counterInt += 1
+                refDay.tomorrow()
+                #else:
+                #    #keepCounting = False
+                #   counterInt -= 1
+            return counterInt
+        elif afterBool:
+            counterInt = 0
+>>>>>>> Stashed changes
             #keepCounting = True
             while refDay.isAfter(day2):#keepCounting:
                 #if refDay.isAfter(day2):
@@ -191,10 +265,22 @@ class Date():
         #return counterInt
 
 """
+<<<<<<< Updated upstream
+=======
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 my = Date(3,15,2012)
 my2 = Date(4,14,2015)
 my3 = Date(3,14,2016).diff(Date(3,14,2017))
 my4 = Date(3,14,2016).diff(Date(3,14,2116))
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+my5 = Date(3,14,2013)
+print my5.diff(my2)
+#print my2
+=======
+>>>>>>> Stashed changes
 my5 = Date(3,14,2012)
 """
 firstDay = Date(3,15,2012)
@@ -207,3 +293,7 @@ print secondDay.diff(firstDay)
 print firstDay.diff(secondDay)
 
 
+<<<<<<< Updated upstream
+=======
+>>>>>>> origin/master
+>>>>>>> Stashed changes
