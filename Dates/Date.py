@@ -5,6 +5,7 @@
 # Name:
 #
 import time
+import datetime
 
 class Date():
     """ a user-defined data structure that
@@ -150,7 +151,6 @@ class Date():
         else:
             return False
 
-<<<<<<< Updated upstream
     def diff (self, d2):
 
         # make a copy of the two days
@@ -179,8 +179,7 @@ class Date():
             return counterInt
         elif afterBool:
             counterInt = 0
-=======
-<<<<<<< HEAD
+
     def diff(self, d2):
         beforeBool = self.isBefore(d2)
         afterBool = self.isAfter(d2)
@@ -216,13 +215,6 @@ class Date():
        ## print t2 - t1
         return counterInt
 
-
-
-
-
-
-
-=======
     def diff (self, d2):
 
         # make a copy of the two days
@@ -251,7 +243,6 @@ class Date():
             return counterInt
         elif afterBool:
             counterInt = 0
->>>>>>> Stashed changes
             #keepCounting = True
             while refDay.isAfter(day2):#keepCounting:
                 #if refDay.isAfter(day2):
@@ -261,39 +252,38 @@ class Date():
                     #keepCounting = False
                     #counterInt -= 1
             return counterInt
+        else:
+            return 0
 
+    def dow (self):
+        myDate = Date(11, 12, 2014)
+        dayDiff = self.diff(myDate)
+        dayRem = dayDiff % 7
+        print dayRem
+        if (dayRem == 0):
+            return "Wednesday"
+        elif (dayRem == 1):
+            return "Tuesday"
+        elif (dayRem == 2):
+            return "Monday"
+        elif (dayRem == 3):
+            return "Sunday"
+        elif (dayRem == 4):
+            return "Saturday"
+        elif (dayRem == 5):
+            return "Friday"
+        elif (dayRem == 6):
+            return "Thursday"
         #return counterInt
 
-"""
-<<<<<<< Updated upstream
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
-my = Date(3,15,2012)
-my2 = Date(4,14,2015)
-my3 = Date(3,14,2016).diff(Date(3,14,2017))
-my4 = Date(3,14,2016).diff(Date(3,14,2116))
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-my5 = Date(3,14,2013)
-print my5.diff(my2)
-#print my2
-=======
->>>>>>> Stashed changes
-my5 = Date(3,14,2012)
-"""
-firstDay = Date(3,15,2012)
-secondDay = Date(4,15,2013)
+
+firstDay = Date(11,12,2014)
+secondDay = Date(3,16,2012)
 
 # your isBefore and isAfter methods weren't working correctly, so I made changes to these and added a docstring explaining what they do
 # your diff is still off by one day, I'll leave that for you to fix!
 
 print secondDay.diff(firstDay)
 print firstDay.diff(secondDay)
+print firstDay.dow();
 
-
-<<<<<<< Updated upstream
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
