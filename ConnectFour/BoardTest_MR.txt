@@ -1,7 +1,7 @@
 Here is the output of your Board class tests.
 
 Score 7/9
-(Fix the bugs to earn full credit)
+(Fix the bugs by Monday 3/28 to earn full credit)
 
 There were a couple issues, I commented out the lines of the test that wouldn't run, but here are those errors:
 

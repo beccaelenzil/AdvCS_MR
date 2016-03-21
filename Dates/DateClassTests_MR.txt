@@ -20,7 +20,7 @@ should be Friday not Saturday. This is likely because of the issue with your dif
 Let me know if you need help tracking down these bugs.
 
 Score: 8/9
-(Fix the bugs to earn full credit)
+(Fix the bugs by Friday 3/25 to earn full credit)
 
 --------------------------------------
 date basics
