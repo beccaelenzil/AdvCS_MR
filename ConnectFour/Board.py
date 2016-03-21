@@ -270,7 +270,7 @@ The board should look like: \n \
  == "
 b.delMove(1)
 b.delMove(1)
-#b.delMove(1)
+b.delMove(1)
 b.delMove(0)
 print b
 
