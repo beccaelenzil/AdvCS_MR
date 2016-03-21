@@ -1,0 +1,148 @@
+Here is the output of your Board class tests.
+
+There were a couple issues, I commented out the lines of the test that wouldn't run, but here are those errors:
+
+#Line 227
+Traceback (most recent call last):
+  File "/Users/becca.elenzil/GitHub/AdvCS/AdvCS_MR/ConnectFour/Board.py", line 227, in <module>
+    print "b.allowsMove(2) should be False == ",b.allowsMove(2)
+  File "/Users/becca.elenzil/GitHub/AdvCS/AdvCS_MR/ConnectFour/Board.py", line 76, in allowsMove
+    mySpace = self.data[i][c]
+IndexError: list index out of range
+
+
+#Line 265
+Traceback (most recent call last):
+  File "/Users/becca.elenzil/GitHub/AdvCS/AdvCS_MR/ConnectFour/Board.py", line 265, in <module>
+    b.delMove(1)
+  File "/Users/becca.elenzil/GitHub/AdvCS/AdvCS_MR/ConnectFour/Board.py", line 103, in delMove
+    self.data[self.height - counterVar][c] = ' '
+IndexError: list index out of range
+
+# Line 283
+if b.setBoard( '23344545515'  ), then b.winsFor('O') should be False ==  None
+
+
+---------------------------------------------
+print a 7 x 6 board with the columns numbered
+---------------------------------------------
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+---------------
+ 0 1 2 3 4 5 6
+
+---------------------------------------------
+test addMove
+---------------------------------------------
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+|X| | | | | | |
+|O| | | | | | |
+|X| | |O|O|O|O|
+---------------
+ 0 1 2 3 4 5 6
+
+==
+
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+|X| | | | | | |
+|O| | | | | | |
+|X| | |O|O|O|O|
+---------------
+ 0 1 2 3 4 5 6
+
+---------------------------------------------
+test clear
+---------------------------------------------
+
+print an empty board
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+| | | | | | | |
+---------------
+ 0 1 2 3 4 5 6
+
+---------------------------------------------
+test allowsMove
+---------------------------------------------
+
+|O| |
+|X| |
+-----
+ 0 1
+
+b.allowsMove(-1) should be False ==  False
+b.allowsMove(0) should be False ==  True
+b.allowsMove(1) should be True ==  True
+
+---------------------------------------------
+test isFull
+---------------------------------------------
+
+| | |
+| | |
+-----
+ 0 1
+
+b.isFull() should be False ==  False
+
+|O|O|
+|X|X|
+-----
+ 0 1
+
+b.isFull() should be True ==  True
+
+---------------------------------------------
+test delMove
+---------------------------------------------
+
+|O|O|
+|X|X|
+-----
+ 0 1
+after the following commands:
+ b.delMove(1)
+ b.delMove(1)
+ b.delMove(1)
+ b.delMove(0)
+ The board should look like:
+ | | |
+ |X| |
+ -----
+  0 1
+  ==
+| | |
+|X| |
+-----
+ 0 1
+
+---------------------------------------------
+test winsFor
+---------------------------------------------
+
+if b.setBoard( '00102030' ), then b.winsFor('X') should be True ==  True
+if b.setBoard( '00102030' ), then b.winsFor('O') should be True ==  True
+if b.setBoard( '23344545515'  ), then b.winsFor('X') should be True ==  True
+if b.setBoard( '23344545515'  ), then b.winsFor('O') should be False ==  None
+
+---------------------------------------------
+host game
+---------------------------------------------
+
+I played with ________
+Everything works!
+or
+It doesn't work
