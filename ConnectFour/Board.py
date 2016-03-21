@@ -70,7 +70,7 @@ class Board:
             else: nextCh = 'X'
 
     def allowsMove(self, c):
-        if 0 <= c <= self.width:
+        if 0 <= c < self.width:
             counterVar = 0
             for i in range(self.height):
                 mySpace = self.data[i][c]
@@ -232,7 +232,7 @@ print " "
 print "b.allowsMove(-1) should be False == ",b.allowsMove(-1)
 print "b.allowsMove(0) should be False == ",b.allowsMove(0)
 print "b.allowsMove(1) should be True == ",b.allowsMove(1)
-#print "b.allowsMove(2) should be False == ",b.allowsMove(2)
+print "b.allowsMove(2) should be False == ",b.allowsMove(2)
 
 print " "
 print "---------------------------------------------"
