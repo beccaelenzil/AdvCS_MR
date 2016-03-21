@@ -259,7 +259,7 @@ class Date():
         myDate = Date(11, 12, 2014)
         dayDiff = self.diff(myDate)
         dayRem = dayDiff % 7
-        print dayRem
+        #print dayRem
         if (dayRem == 0):
             return "Wednesday"
         elif (dayRem == 1):
