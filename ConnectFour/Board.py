@@ -77,7 +77,7 @@ class Board:
                 if mySpace == 'O' or mySpace == 'X':
                     counterVar += 1
                # print counterVar
-            if counterVar <= self.height:
+            if counterVar < self.height:
                 return True
             else:
                 return False
@@ -109,6 +109,7 @@ class Board:
         H = self.height
         W = self.width
         D = self.data
+        truVar = 0
         # check for horizontal wins
         for row in range(0,H):
             for col in range(0,W-3):
@@ -117,6 +118,7 @@ class Board:
                    D[row][col+2] == ox and \
                    D[row][col+3] == ox:
                     return True
+                    truVar = 1
                     break
                 #else:
                     #return False
@@ -125,6 +127,7 @@ class Board:
             for col in range (0,W):
                 if D[row][col] == ox and D[row+1][col] == ox and D[row+2][col] == ox and D[row+3][col] == ox:
                     return True
+                    truVar = 1
                     break
                 #else:
                     #return False
@@ -133,6 +136,7 @@ class Board:
             for col in range (0, W-3):
                 if D[row][col] == ox and D[row+1][col+1] == ox and D[row+2][col+2] == ox and D[row+3][col+3] == ox:
                     return True
+                    truVar = 1
                     break
                 #else:
                     #return False
@@ -140,7 +144,11 @@ class Board:
             for col in range (0, W-3):
                 if D[row][col] == ox and D[row-1][col+1] == ox and D[row-2][col+2] == ox and D[row-3][col+3] == ox:
                     return True
+                    truVar = 1
                     break
+
+        if truVar == 0:
+            return False
 
     def hostGame(self):
         hasWon = False
