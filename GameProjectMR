@@ -1,4 +1,6 @@
+Memory game!
 
 Game Play:
+The user chooses the size of a board (it will be square, so they will input a length).  Letters rating from A-Z are then randomly generated and placed at random locations on the board.  The user inputs a row, column pair to see the contents of a square.  After two seconds, a clean board is printed and the user must guess again.  If the user guesses the same letter twice in a row (in different locations on the board), they win!
 
 Objective of the Game:
