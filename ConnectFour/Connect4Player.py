@@ -1,5 +1,7 @@
 import random
-import Board
+import sys
+from Board import MyBoard
+
 class basicPlayer():
     """a basic player class that selects the next move"""
     def __init__(self, ox):
@@ -40,7 +42,7 @@ class smartPlayer(basicPlayer):
             if not b.allowsMove(col):
                 scores[col] = -1
             else:
-                b.addMove(self.ox)
+                b.addMove(col, self.ox)
                 if b.winsFor(self.ox):
                     scores[col] = 100
                 else:
@@ -49,9 +51,91 @@ class smartPlayer(basicPlayer):
                             b.addMove(colOpp, self.oppCh())
                             if b.winsFor(self.oppCh()):
                                 scores[col] = 0
+                            b.delMove(colOpp)
                 b.delMove(col)
         return scores
 
-p = smartPlayer('X')
-print p
+    def nextMove(self, b):
+        scores = self.scoresFor(b)
+        maxIndex = []
+        for i in range(len(scores)):
+            if scores[i] == max(scores):
+                maxIndex.append(i)
+        col = random.choice(maxIndex)
+        return col
+
+def playGame(playerX, playerO):
+
+    """
+    playerX should be 'basic', 'smart' or 'human'
+    playerO should be 'basic', 'smart' or 'human'
+    """
+    if playerX == 'smart':
+        pX = smartPlayer('X')
+    elif playerX == 'basic':
+        pX = basicPlayer('X')
+    elif playerX != 'human':
+        print "Player X should be 'smart', 'basic', or 'human'. Try again!"
+        sys.exit()
+
+    if playerO == 'smart':
+        pO = smartPlayer('O')
+    elif playerO == 'basic':
+        pO = basicPlayer('O')
+    elif playerO != 'human':
+        print "Player O should be 'smart', 'basic', or 'human'. Try again!"
+        sys.exit()
+
+    b = MyBoard(7,6)
+    #print b
+
+    hasWon = False
+    while (hasWon == False):
+        users_col = -1
+        while b.allowsMove( users_col ) == False:
+            if pX == 'human':
+                users_col = input("X, choose a column: ")
+            else:
+                users_col = pX.nextMove(b)
+
+        b.addMove(users_col, 'X')
+
+        #print "X's choice: " + str(users_col)
+        #print b
+
+        xWins = b.winsFor('X')
+        if xWins:
+            hasWon == True
+            #print "X has won!"
+            return 0
+        elif b.isFull():
+            hasWon == True
+            #print "Tie!"
+            return 2
+        users_col = -1
+        while b.allowsMove( users_col ) == False:
+            if pO == 'human':
+                users_col = input("O, choose a column: ")
+            else:
+                users_col = pO.nextMove(b)
+        b.addMove(users_col, 'O')
+        #print "O's choice: " + str(users_col)
+        #print b
+        OWins = b.winsFor('O')
+        if OWins:
+            hasWon == True
+            #print "O has won!"
+            return 1
+        elif b.isFull():
+            hasWon == True
+            #print "Tie!"
+            return 2
+
+#p = playGame('smart', 'smart')
+o_x_truce = [0,0,0]
+for i in range (10000):
+    winner = playGame('smart', 'smart')
+    o_x_truce[winner] += 1
+print o_x_truce
+#print p
 #Smart Player for X

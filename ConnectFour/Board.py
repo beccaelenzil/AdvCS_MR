@@ -1,4 +1,4 @@
-class Board:
+class MyBoard:
     """ a datatype representing a C4 board
         with an arbitrary number of rows and cols
     """
@@ -177,13 +177,13 @@ class Board:
                 break
 
 
-my = Board(7,6)
+#my = MyBoard(7,6)
 #my.hostGame()
 #my.addMove(9, 'O')
 #my.addMove(9, 'X')
 
 # Connect Four Tests
-
+"""
 print "---------------------------------------------"
 print "print a 7 x 6 board with the columns numbered"
 print "---------------------------------------------\n"
@@ -301,4 +301,4 @@ print "I played with ________"
 print "Everything works!"
 print "or"
 print "It doesn't work"
-
+"""

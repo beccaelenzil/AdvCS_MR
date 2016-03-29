@@ -18,7 +18,7 @@ class Memory:
             s += str(colCounter) + ' |'
             colCounter += 1
             for col in range(0,W):
-                    s += self.data[row][col] + '|'
+                    s += str(self.data[row][col]) + '|'
             s += '\n'
 
         #s += (2*W+1) * '-'    # bottom of the board
@@ -44,7 +44,6 @@ class Memory:
         for row in range(0,H-1):
             for col in range(0,W-1):
                 self.data[row][col] = self.numData[2*row+col]
-                print row,col
 
         self.hostGame()
 
