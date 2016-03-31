@@ -37,8 +37,8 @@ class Memory:
 
     def createBoard(self):
         for i in range((self.colNum * self.colNum) / 2):
-                self.numData.append(i)
-                self.numData.append(i)
+            self.numData.append(i)
+            self.numData.append(i)
             random.shuffle(self.numData)
             H = self.colNum
             W = self.colNum
@@ -49,9 +49,11 @@ class Memory:
                     if len(numString) == 1:
                         print len(self.data)
                         print i
-                        self.data[row][col] = str(self.numData[i]) + " "
+                        #self.data[row][col] = str(self.numData[i]) + " "
+                        self.data[row][col] = "*"
                     else:
-                        self.data[row][col] = str(self.numData[i])
+                        #self.data[row][col] = str(self.numData[i])
+                        self.data[row][col] = "*"
                     i += 1
             self.hostGame()
 
@@ -62,6 +64,8 @@ class Memory:
         inputArray = user_input.split(',')
         chosenRow = int(inputArray[0])
         chosenColumn = int(inputArray[1])
+        self.data[chosenRow][chosenColumn] = self.numData[chosenRow][chosenColumn]
+        print self
 
 
 
