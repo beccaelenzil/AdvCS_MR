@@ -7,6 +7,7 @@ class Memory:
             self.colNum = input("Welcome to Memory!  Please choose the width of your square board (must an even number).")
         self.data = [ [' ']*self.colNum for row in range(self.colNum) ]
         self.numData= []
+        self.pairs = []
         #self.answerData
         self.createBoard()
 
@@ -67,16 +68,52 @@ class Memory:
             print self
             user_input = raw_input("Please choose a space to reveal in the format 'row,column'.")
             inputArray = user_input.split(',')
-            chosenRow = int(inputArray[0])
-            chosenColumn = int(inputArray[1])
+            chosenRow = int(inputArray[0]) - 1
+            chosenColumn = int(inputArray[1]) - 1
             numString = str(chosenColumn)
-            if len(self.data[chosenRow][chosenColumn]) == 1:
-                #self.data[row][col] = str(self.numData[i]) + " "
-                self.data[chosenRow][chosenColumn] = " " + str(self.numData[chosenRow]) + " "
-            else:
-                #self.data[row][col] = str(self.numData[i])
-                self.data[chosenRow][chosenColumn] = str(self.numData[chosenRow]) + " "
-            print self
+            #self.data[row][col] = str(self.numData[i]) + " "
+            H = self.colNum
+            W = self.colNum
+            i = 0
+            for row in range(H):
+                for col in range(W):
+                    numString = str(self.numData[i])
+                    if row == chosenRow and col == chosenColumn:
+                        if len(numString) == 1:
+                            self.data[row][col] = " " + str(self.numData[i]) + " "
+                            #self.data[row][col] = " * "
+                        else:
+                            self.data[row][col] = str(self.numData[i]) + " "
+                            #self.data[row][col] = " * "
+                    i += 1
+            firstChosenNum = self.data[row][col]
+            user_input = raw_input("Please choose a space to reveal in the format 'row,column'.")
+            inputArray = user_input.split(',')
+            chosenRow = int(inputArray[0]) - 1
+            chosenColumn = int(inputArray[1]) - 1
+            numString = str(chosenColumn)
+            #self.data[row][col] = str(self.numData[i]) + " "
+            H = self.colNum
+            W = self.colNum
+            i = 0
+            for row in range(H):
+                for col in range(W):
+                    numString = str(self.numData[i])
+                    if row == chosenRow and col == chosenColumn:
+                        if len(numString) == 1:
+                            self.data[row][col] = " " + str(self.numData[i]) + " "
+                            #self.data[row][col] = " * "
+                        else:
+                            self.data[row][col] = str(self.numData[i]) + " "
+                            #self.data[row][col] = " * "
+                    i += 1
+            secondChosenNum = self.data[row][col]
+            self.checkForPairs()
+    def checkForPairs(self, p1, p2):
+        if p1 == p2:
+            self.pairs += []
+
+
 
 
 my = Memory()

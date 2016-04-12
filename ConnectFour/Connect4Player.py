@@ -131,11 +131,14 @@ def playGame(playerX, playerO):
             #print "Tie!"
             return 2
 
+print "hi"
+
 #p = playGame('smart', 'smart')
 o_x_truce = [0,0,0]
-for i in range (10000):
+for i in range (100):
     winner = playGame('smart', 'smart')
     o_x_truce[winner] += 1
+    print i
 print o_x_truce
 #print p
 #Smart Player for X
