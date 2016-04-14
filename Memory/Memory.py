@@ -1,4 +1,5 @@
 import random
+import time
 class Memory:
 
     def __init__(self):
@@ -30,11 +31,17 @@ class Memory:
         #s += (2*W+1) * '-'    # bottom of the board
         s += '  '
         x = 1
-        s += "  "
+        if self.colNum < 10:
+            s += "  "
+        else:
+            s += "   "
         s += str(x)
         for i in range(W - 1):
                 x += 1
-                s += "   "
+                if self.colNum > 9 and i > 8:
+                    s += "  "
+                else:
+                    s += "   "
                 s += str(x)
            # the string to return
         # and the numbers underneath here
@@ -85,9 +92,13 @@ class Memory:
                         else:
                             self.data[row][col] = str(self.numData[i]) + " "
                             #self.data[row][col] = " * "
+                        chosenValue = self.data[row][col]
                     i += 1
-            firstChosenNum = self.data[row][col]
-            user_input = raw_input("Please choose a space to reveal in the format 'row,column'.")
+            firstChosenNum = chosenValue
+            firstRow = row
+            firstColumn = col
+            #print self
+            user_input = raw_input("Please choose a second space to reveal in the format 'row,column'.")
             inputArray = user_input.split(',')
             chosenRow = int(inputArray[0]) - 1
             chosenColumn = int(inputArray[1]) - 1
@@ -106,14 +117,43 @@ class Memory:
                         else:
                             self.data[row][col] = str(self.numData[i]) + " "
                             #self.data[row][col] = " * "
+                        chosenValue = self.data[row][col]
                     i += 1
-            secondChosenNum = self.data[row][col]
-            self.checkForPairs()
-    def checkForPairs(self, p1, p2):
+            secondChosenNum = chosenValue
+            secondRow = row
+            secondColumn = col
+            if self.checkForPairs(firstChosenNum, secondChosenNum, firstRow, firstColumn, secondRow, secondColumn):
+                if self.checkForEnd():
+                    print "Congratulations!  You have found all the pairs!"
+                    break
+                else:
+                    print "Congratulations, you found a pair!"
+            else:
+                print "Sorry, the two values you chose are not a pair."
+            #check if all pairs have been found
+
+    def checkForPairs(self, p1, p2, row1, col1, row2, col2):
         if p1 == p2:
-            self.pairs += []
+            self.pairs += [row1, col1]
+            self.pairs += [row2, col2]
+            return True
+        else:
+            return False
 
+    def checkForEnd(self):
+        H = self.colNum
+        W = self.colNum
+        i = 0
+        for row in range(H):
+            for col in range(W):
+                if "*" in self.data[row][col]:
+                    i += 1
+        if i == 0:
+            return True
+        else:
+            return False
 
+    def printBlankBoard(self):
 
 
 my = Memory()
