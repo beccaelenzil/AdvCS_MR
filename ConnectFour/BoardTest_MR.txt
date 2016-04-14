@@ -3,6 +3,26 @@ Here is the output of your Board class tests.
 Score 7/9
 (Fix the bugs by Monday 3/28 to earn full credit)
 
+There's still an issue with delMove (4/14)
+Final Score: 8/9
+
+Here is a simple implementation of delMove:
+
+
+def delMove(self,col):
+        """remove top checker from a col"""
+        """adds and 'X' or an 'O' to a specified column"""
+        H = self.height
+        W = self.width
+
+        for row in range(0,H):
+            if self.data[row][col] != ' ':
+                self.data[row][col] = ' '
+                return self.data
+
+
+Initial Test:
+
 There were a couple issues, I commented out the lines of the test that wouldn't run, but here are those errors:
 
 #Line 227
@@ -24,6 +44,8 @@ IndexError: list index out of range
 
 # Line 283
 if b.setBoard( '23344545515'  ), then b.winsFor('O') should be False ==  None
+
+
 
 
 ---------------------------------------------

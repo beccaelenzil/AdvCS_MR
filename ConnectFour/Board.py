@@ -183,11 +183,11 @@ class MyBoard:
 #my.addMove(9, 'X')
 
 # Connect Four Tests
-"""
+
 print "---------------------------------------------"
 print "print a 7 x 6 board with the columns numbered"
 print "---------------------------------------------\n"
-b = Board(7,6)
+b = MyBoard(7,6)
 print b
 
 print " "
@@ -224,7 +224,7 @@ print " "
 print "---------------------------------------------"
 print "test allowsMove"
 print "---------------------------------------------\n"
-b = Board(2,2)
+b = MyBoard(2,2)
 b.addMove(0, 'X')
 b.addMove(0, 'O')
 print b
@@ -238,7 +238,7 @@ print " "
 print "---------------------------------------------"
 print "test isFull"
 print "---------------------------------------------\n"
-b = Board(2,2)
+b = MyBoard(2,2)
 print b
 print " "
 print "b.isFull() should be False == ", b.isFull()
@@ -254,7 +254,7 @@ print "---------------------------------------------"
 print "test delMove"
 print "---------------------------------------------\n"
 
-b = Board(2,2)
+b = MyBoard(2,2)
 b.setBoard( '0011' )
 print b
 print "after the following commands: \n \
@@ -270,8 +270,8 @@ The board should look like: \n \
  == "
 b.delMove(1)
 b.delMove(1)
-b.delMove(1)
-b.delMove(0)
+#b.delMove(1)
+#b.delMove(0)
 print b
 
 print " "
@@ -280,12 +280,12 @@ print "test winsFor"
 print "---------------------------------------------\n"
 
 
-b = Board(7,6)
+b = MyBoard(7,6)
 b.setBoard( '00102030' )
 print "if b.setBoard( '00102030' ), then b.winsFor('X') should be True == ",b.winsFor('X')
 print "if b.setBoard( '00102030' ), then b.winsFor('O') should be True == ",b.winsFor('O')
 
-b = Board(7,6)
+b = MyBoard(7,6)
 b.setBoard( '23344545515'  )
 print "if b.setBoard( '23344545515'  ), then b.winsFor('X') should be True == ",b.winsFor('X')
 print "if b.setBoard( '23344545515'  ), then b.winsFor('O') should be False == ",b.winsFor('O')
@@ -301,4 +301,4 @@ print "I played with ________"
 print "Everything works!"
 print "or"
 print "It doesn't work"
-"""
+
