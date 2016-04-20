@@ -86,6 +86,8 @@ class Memory:
                 for col in range(W):
                     numString = str(self.numData[i])
                     if row == chosenRow and col == chosenColumn:
+                        for pair in self.pairs:
+                            #self.ata[row][col] = pair
                         if len(numString) == 1:
                             self.data[row][col] = " " + str(self.numData[i]) + " "
                             #self.data[row][col] = " * "
@@ -97,7 +99,7 @@ class Memory:
             firstChosenNum = chosenValue
             firstRow = row
             firstColumn = col
-            #print self
+            print self
             user_input = raw_input("Please choose a second space to reveal in the format 'row,column'.")
             inputArray = user_input.split(',')
             chosenRow = int(inputArray[0]) - 1
@@ -131,6 +133,8 @@ class Memory:
             else:
                 print "Sorry, the two values you chose are not a pair."
             #check if all pairs have been found
+            time.sleep(2)
+            self.printBlankBoard()
 
     def checkForPairs(self, p1, p2, row1, col1, row2, col2):
         if p1 == p2:
@@ -154,6 +158,19 @@ class Memory:
             return False
 
     def printBlankBoard(self):
+        H = self.colNum
+        W = self.colNum
+        i = 0
+        for row in range(H):
+            for col in range(W):
+                numString = str(self.numData[i])
+                if len(numString) == 1:
+                    #self.data[row][col] = str(self.numData[i]) + " "
+                    self.data[row][col] = " * "
+                else:
+                    #self.data[row][col] = str(self.numData[i])
+                    self.data[row][col] = " * "
+                i += 1
 
 
 my = Memory()
