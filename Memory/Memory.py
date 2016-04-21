@@ -87,7 +87,14 @@ class Memory:
                     numString = str(self.numData[i])
                     if row == chosenRow and col == chosenColumn:
                         for pair in self.pairs:
-                            #self.ata[row][col] = pair
+                            #print pair
+                            dataRow = pair[0]
+                            dataCol = pair[1]
+                            dataVal = pair[2]
+                            if len(str(dataVal)) == 1:
+                                self.data[dataRow][dataCol] = " " + str(dataVal) + " "
+                            else:
+                                self.data[dataRow][dataCol] = " " + str(dataVal)
                         if len(numString) == 1:
                             self.data[row][col] = " " + str(self.numData[i]) + " "
                             #self.data[row][col] = " * "
@@ -95,10 +102,11 @@ class Memory:
                             self.data[row][col] = str(self.numData[i]) + " "
                             #self.data[row][col] = " * "
                         chosenValue = self.data[row][col]
+                        firstChosenNum = chosenValue
+                        firstRow = row
+                        firstColumn = col
                     i += 1
-            firstChosenNum = chosenValue
-            firstRow = row
-            firstColumn = col
+
             print self
             user_input = raw_input("Please choose a second space to reveal in the format 'row,column'.")
             inputArray = user_input.split(',')
@@ -120,11 +128,12 @@ class Memory:
                             self.data[row][col] = str(self.numData[i]) + " "
                             #self.data[row][col] = " * "
                         chosenValue = self.data[row][col]
+                        secondChosenNum = chosenValue
+                        secondRow = row
+                        secondColumn = col
                     i += 1
-            secondChosenNum = chosenValue
-            secondRow = row
-            secondColumn = col
-            if self.checkForPairs(firstChosenNum, secondChosenNum, firstRow, firstColumn, secondRow, secondColumn):
+            print self
+            if self.checkForPairs(firstChosenNum, secondChosenNum, chosenValue, firstRow, firstColumn, secondRow, secondColumn):
                 if self.checkForEnd():
                     print "Congratulations!  You have found all the pairs!"
                     break
@@ -136,10 +145,11 @@ class Memory:
             time.sleep(2)
             self.printBlankBoard()
 
-    def checkForPairs(self, p1, p2, row1, col1, row2, col2):
+    def checkForPairs(self, p1, p2, chosenVal, row1, col1, row2, col2):
         if p1 == p2:
-            self.pairs += [row1, col1]
-            self.pairs += [row2, col2]
+            self.pairs += [[row1, col1, chosenVal]]
+            self.pairs += [[row2, col2, chosenVal]]
+            #print self.pairs
             return True
         else:
             return False
@@ -161,8 +171,18 @@ class Memory:
         H = self.colNum
         W = self.colNum
         i = 0
+        print self.pairs
         for row in range(H):
             for col in range(W):
+                for pair in self.pairs:
+                    #print pair
+                    dataRow = pair[0]
+                    dataCol = pair[1]
+                    dataVal = pair[2]
+                    if len(str(dataVal)) == 1:
+                        self.data[dataRow][dataCol] = str(dataVal) + " "
+                    else:
+                        self.data[dataRow][dataCol] = str(dataVal)
                 numString = str(self.numData[i])
                 if len(numString) == 1:
                     #self.data[row][col] = str(self.numData[i]) + " "
