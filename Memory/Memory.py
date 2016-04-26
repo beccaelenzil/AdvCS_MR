@@ -68,6 +68,9 @@ class Memory:
                 i += 1
         self.hostGame()
 
+    def generateLocation(self):
+        location = random.randint(0,self.colNum)
+        return location
 
     def hostGame(self):
         isPlaying = True
@@ -106,7 +109,34 @@ class Memory:
                         firstRow = row
                         firstColumn = col
                     i += 1
-
+            print self
+            self.printBlankBoard()
+            botRow = self.generateLocation()
+            botCol = self.generateLocation()
+            for botRow in range(H):
+                for botCol in range(W):
+                    numString = str(self.numData[i])
+                    if row == chosenRow and col == chosenColumn:
+                        for pair in self.pairs:
+                            #print pair
+                            dataRow = pair[0]
+                            dataCol = pair[1]
+                            dataVal = pair[2]
+                            if len(str(dataVal)) == 1:
+                                self.data[dataRow][dataCol] = " " + str(dataVal) + " "
+                            else:
+                                self.data[dataRow][dataCol] = " " + str(dataVal)
+                        if len(numString) == 1:
+                            self.data[row][col] = " " + str(self.numData[i]) + " "
+                            #self.data[row][col] = " * "
+                        else:
+                            self.data[row][col] = str(self.numData[i]) + " "
+                            #self.data[row][col] = " * "
+                        chosenValue = self.data[row][col]
+                        firstChosenNum = chosenValue
+                        firstRow = row
+                        firstColumn = col
+                    i += 1
             print self
             user_input = raw_input("Please choose a second space to reveal in the format 'row,column'.")
             inputArray = user_input.split(',')

@@ -1,0 +1,17 @@
+myList = [4,5,3,2]
+
+def compare():
+    smallestFound = False
+    i = 0;
+    while smallestFound == False:
+        numIndex = myList[i]
+        for x in myList:
+            if (myList[i] < x):
+                smallestFound = False
+                i += 1
+            else:
+                smallestFound = True
+
+
+def linear():
+    
