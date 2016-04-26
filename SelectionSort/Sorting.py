@@ -10,9 +10,9 @@ def createRandomList(myList):
 
 def quickSort(myList, start, stop):
     if stop-start < 1:
-        return
+        return myList
     else:
-        pivot = myList[0]
+        pivot = myList[start]
         left = start
         right = stop
         while left <= right:
@@ -24,15 +24,17 @@ def quickSort(myList, start, stop):
                 myList[right],myList[left] = myList[left],myList[right]
                 left += 1
                 right -=1
-            #print(some_list)
+            #print(myList)
 
-        quickSort(some_list, start, right)
-        quickSort(some_list, left, stop)
+        quickSort(myList, start, right)
+        quickSort(myList, left, stop)
+
     return myList
 
 my = createRandomList(some_list)
-my = quickSort([39,30,45,33,20,61,36,5,31,64], 0, 5)
-print my
+my = [39,30,45,33,20,61,36,5,31,64]
+my = quickSort([39,30,45,33,20,61,36,5,31,64], 0, len(my)-1)
+#print my
 
 def insertionSort(some_list):
     list = some_list
@@ -71,6 +73,44 @@ def bubbleSort(some_list):
                 list[i+1], list[i] = list[i], list[i+1]
                 flip = True
         k -= 1
+
+def mergeSort(some_list):
+    if len(some_list) > 1:
+        middleVal = len(some_list) // 2
+        rightList = some_list[middleVal:]
+        leftList = some_list[:middleVal]
+
+        mergeSort(rightList)
+        mergeSort(leftList)
+
+        i = 0
+        j = 0
+        k = 0
+
+        while i < len(leftList) and j < len(rightList):
+            if leftList[i] < rightList[j]:
+                some_list[k] = leftList[i]
+                i = i+1
+            else:
+                some_list[k] = rightList[j]
+                j = j+1
+            k += 1
+
+
+        while i < len(leftList):
+            some_list[k] = leftList[i]
+            i = i + 1
+            k = k + 1
+
+        while j < len(rightList):
+            some_list[k] = rightList[j]
+            j = j + 1
+            k = k + 1
+
+aList = [9,2,5,23,94,32,34,6]
+mergeSort(aList)
+print aList
+
 
 
 

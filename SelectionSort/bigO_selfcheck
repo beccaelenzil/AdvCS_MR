@@ -26,5 +26,6 @@ def linear():
                 flip = True
         k -= 1
     smallestVal = myList[0]
+    print smallestVal
 
 
