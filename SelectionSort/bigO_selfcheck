@@ -1,6 +1,6 @@
 myList = [4,5,3,2]
 
-def compare():
+def compare(myList):
     smallestFound = False
     i = 0;
     while smallestFound == False:
@@ -11,7 +11,20 @@ def compare():
                 i += 1
             else:
                 smallestFound = True
-
+                return myList
+my = compare(myList)
 
 def linear():
-    
+    list = myList
+    k = len(list) - 1
+    flip = True
+    while flip == True:
+        flip = False
+        for i in range(0,k):
+            if list[i] > list[i+1]:
+                list[i+1], list[i] = list[i], list[i+1]
+                flip = True
+        k -= 1
+    smallestVal = myList[0]
+
+
