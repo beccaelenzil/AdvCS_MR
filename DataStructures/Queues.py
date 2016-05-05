@@ -14,6 +14,14 @@ class Queue:
     def size(self):
         return len(self.items)
 
+    def hotPotato(self, nameList, num):
+        q = Queue()
+        i = 0
+        while len(nameList) > 0:
+
+            if i == num
+                
+            i += 1
 q=Queue()
 q.enqueue(4)
 q.enqueue('dog')

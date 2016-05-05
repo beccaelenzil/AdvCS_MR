@@ -58,21 +58,60 @@ class Stack:
                 if s.isEmpty():
                     return False
                 else:
-                    if s.pop() ==
                     s.pop()
-
-
          if s.isEmpty():
             return True
          else:
             return False
 
+     def parChecker(self, symbolString):
+        s = Stack()
+        #instatiate new stack
+        balanced = True
+        index = 0
+        while index < len(symbolString) and balanced:
+            symbol = symbolString[index]
+            if symbol in "([{":
+                s.push(symbol)
+            else:
+                if s.isEmpty():
+                    balanced = False
+                else:
+                    top = s.pop()
+                    if not self.matches(top,symbol):
+                           balanced = False
+            index = index + 1
+
+        if balanced and s.isEmpty():
+            return True
+        else:
+            return False
+
+     def matches(self, open,close):
+        opens = "([{"
+        closers = ")]}"
+        return opens.index(open) == closers.index(close)
+
+     def divideByTwo(self, number, base):
+         s = Stack()
+         binaryString = ""
+         while number > 0:
+             rem = number % base
+             number = number // base
+             s.push(rem)
+
+         while s.size() > 0:
+             binaryString = binaryString + str(s.pop())
+
+         return binaryString
+
 
 
 
 s=Stack()
-
-print "parChecker('((()))') == True: ", s.parChecker('((()))')
-print "balSymChecker('{{([][])}()}') == True: ", s.balSymChecker('{{([][])}()}')
-print "balSymChecker('[{()]') == False: ",  s.balSymChecker('[{()]')
+print s.divideByTwo(26, 2)
+#print "parChecker('((()))') == True: ", s.parChecker('((()))')
+#print "parChecker('{{([][])}()}') == True: ", s.parChecker('{{([][])}()}')
+#print "balSymChecker('{{([][])}()}') == True: ", s.balSymChecker('{{([][])}()}')
+#print "balSymChecker('[{()]') == False: ",  s.balSymChecker('[{()]')
 # Yes, all of these outcomes are expected
