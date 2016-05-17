@@ -133,6 +133,7 @@ class Memory:
 
                 #3rd tab in, check for player pairs
                 if self.checkForPairs(ChosenNum[0], ChosenNum[1], chosenValue, Row[0], Col[0], Row[1], Col[1]):
+
                     if self.checkForEnd():
                         print "Congratulations!  You won!"
                         break
@@ -140,15 +141,17 @@ class Memory:
                         print "Congratulations, you found a pair!\n"
                 else:
                     print "Sorry, the two values you chose are not a pair.\n"
-                    playersTurn = False
-                    computersTurn = True
+                    #playersTurn = False
+                    #computersTurn = True
 
 
-                print "Now it's the computer turn"
+                #print "Now it's the computer turn"
                 time.sleep(2)
                 self.printBlankBoard()
+                #print self
+                #self.printBlankBoard()
 
-
+            """
             while computersTurn:
 
                 botChosenNum = []
@@ -157,8 +160,9 @@ class Memory:
 
                 #3rd tab in, bot should get two positions
                 for n in range(2):
-                    botRow = self.generateLocation()
-                    botCol = self.generateLocation()
+
+                    botRow = random.randint(0,self.colNum) #self.generateLocation()
+                    botCol = random.randint(0,self.colNum) #self.generateLocation()
 
                     j = 0
 
@@ -175,15 +179,14 @@ class Memory:
                                         self.data[dataRow][dataCol] = " " + str(dataVal) + " "
                                     else:
                                         self.data[dataRow][dataCol] = " " + str(dataVal)
+
                                 #printing the newly-chosen pair
                                 if len(numString) == 1:
                                     self.data[botRow][botCol] = " " + str(self.numData[j]) + " "
-                                    #print self.numData[j]
-                                        #self.data[row][col] = " * "
+
                                 else:
                                     self.data[botRow][botCol] = str(self.numData[j]) + ""
-                                    #print self.numData[j]
-                                        #self.data[row][col] = " * "
+
 
                                 botChosenValue = self.data[botRow][botCol]
                                 botChosenNum.append(botChosenValue)
@@ -191,6 +194,7 @@ class Memory:
                                 botColList.append(botCol)
 
                             j += 1
+
                     print self
 
                 print botRowList
@@ -211,6 +215,7 @@ class Memory:
 
 
                 time.sleep(2)
+                """
 
     def checkForPairs(self, p1, p2, chosenVal, row1, col1, row2, col2):
         if p1 == p2:
