@@ -27,6 +27,62 @@ class LinkedList:
         myTempNode.setNext(self.head)
         self.head = myTempNode
 
+    def append(self, myItem):
+        current = self.head
+        while (current.getNext() != None):
+                current = current.getNext();
+        myTempNode = Node(myItem)
+        myTempNode.setNext(None)
+
+    def insert(self, myItem, myIndex):
+        found = False
+        current = self.head
+        counter = 0;
+        while (found == False and current.getNext() != None):
+            if (counter == myIndex):
+                found = True;
+                break;
+            else:
+                current = current.getNext();
+                counter += 1
+        myTempNode = Node(myItem)
+        myTempNode.setNext(current)
+
+    def pop(self):
+        found = False
+        current = self.head
+        previous = None
+        while (current.getNext() != None):
+            previous = current
+            current = current.getNext();
+        if (previous != None):
+            previous.setNext(None)
+        else:
+            self.head = None
+
+    def Display(self):
+        current = self.head
+        myList = [current.data];
+        while (current.getNext() != None):
+            current = current.getNext();
+            myList.append(current.data)
+        print myList
+
+    def getAtIndex(self, myIndex):
+        found = False
+        current = self.head
+        counter = 0;
+        while (found == False and current.getNext() != None):
+            if (counter == myIndex):
+                found = True;
+                break;
+            else:
+                current = current.getNext();
+                counter += 1
+        print current.data
+
+    def
+
     def size(self):
         current = self.head
         count = 0
@@ -66,5 +122,6 @@ myList = LinkedList()
 myList.add(23)
 myList.add(56)
 
-myList.remove(56)
-print myList.size()
+#myList.remove(56)
+#print myList.size()
+myList.Display()

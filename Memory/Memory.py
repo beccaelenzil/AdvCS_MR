@@ -71,6 +71,10 @@ class Memory:
         self.hostGame()
 
     def generateLocation(self):
+<<<<<<< Updated upstream
+=======
+        #Generate random number for bot
+>>>>>>> Stashed changes
         location = random.randint(1,self.colNum)
         return location
 
@@ -78,6 +82,7 @@ class Memory:
         isPlaying = True
         while (isPlaying):
             print self
+            #While neither the user nor the bot has won, the hostGame method keeps looping and the human and the bot keep taking turns
             user_input = raw_input("Please choose a space to reveal in the format 'row,column'.")
             inputArray = user_input.split(',')
             chosenRow = int(inputArray[0]) - 1
@@ -138,7 +143,7 @@ class Memory:
                     i += 1
             print self
             print self
-            if self.checkForPairs(firstChosenNum, secondChosenNum, chosenValue, firstRow, firstColumn, secondRow, secondColumn):
+            if self.checkForPairs(firstChosenNum, secondChosenNum, firstRow, firstColumn, secondRow, secondColumn):
                 if self.checkForEnd():
                     print "Congratulations!  You won!"
                     break
@@ -197,7 +202,7 @@ class Memory:
                             #print self.numData[j]
                                 #self.data[row][col] = " * "
                         else:
-                            self.data[botRow][botCol] = str(self.numData[j]) + " "
+                            self.data[botRow][botCol] = str(self.numData[j])
                             #print self.numData[j]
                                 #self.data[row][col] = " * "
                         botChosenValue = self.data[botRow][botCol]
@@ -206,7 +211,7 @@ class Memory:
                         botSecondColumn = botCol
                     j += 1
             print self
-            if self.checkForBotPairs(botFirstChosenNum, botSecondChosenNum, botChosenValue, botFirstRow, botFirstColumn, botSecondRow, botSecondColumn):
+            if self.checkForBotPairs(botFirstChosenNum, botSecondChosenNum, botFirstRow, botFirstColumn, botSecondRow, botSecondColumn):
                 if self.checkForBotEnd():
                     print "Sorry!  The bot found all the pairs first!"
                     break
@@ -218,19 +223,19 @@ class Memory:
             time.sleep(2)
             self.printBlankBoard()
 
-    def checkForPairs(self, p1, p2, chosenVal, row1, col1, row2, col2):
+    def checkForPairs(self, p1, p2, row1, col1, row2, col2):
         if p1 == p2:
-            self.pairs += [[row1, col1, chosenVal]]
-            self.pairs += [[row2, col2, chosenVal]]
+            self.pairs += [[row1, col1, p1]]
+            self.pairs += [[row2, col2, p2]]
             #print self.pairs
             return True
         else:
             return False
 
-    def checkForBotPairs(self, p1, p2, chosenVal, row1, col1, row2, col2):
+    def checkForBotPairs(self, p1, p2, row1, col1, row2, col2):
         if p1 == p2:
-            self.botPairs += [[row1, col1, chosenVal]]
-            self.botPairs += [[row2, col2, chosenVal]]
+            self.botPairs += [[row1, col1, p1]]
+            self.botPairs += [[row2, col2, p2]]
             #print self.pairs
             return True
         else:
@@ -266,7 +271,7 @@ class Memory:
         H = self.colNum
         W = self.colNum
         i = 0
-        print self.pairs
+        #print self.pairs
         for row in range(H):
             for col in range(W):
                 for pair in self.pairs:
