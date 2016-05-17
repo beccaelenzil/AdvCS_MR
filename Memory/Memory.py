@@ -7,7 +7,6 @@ class Memory:
         while self.colNum % 2 != 0:
             self.colNum = input("Welcome to Memory!  Please choose the width of your square board (must an even number).")
         self.data = [ [' ']*self.colNum for row in range(self.colNum) ]
-        self.botData = [ [' ']*self.colNum for row in range(self.colNum) ]
         self.numData= []
         self.pairs = []
         self.botPairs = []
@@ -113,37 +112,6 @@ class Memory:
                         firstColumn = col
                     i += 1
             print self
-            self.printBlankBoard()
-            botRow = self.generateLocation()
-            botCol = self.generateLocation()
-            j = 0
-            for bRow in range(self.colNum):
-                for bCol in range(self.colNum):
-                    if bRow == botRow and bCol == botCol:
-                        for pair in self.botPairs:
-                            #print pair
-                            dataRow = pair[0]
-                            dataCol = pair[1]
-                            dataVal = pair[2]
-                            if len(str(dataVal)) == 1:
-                                self.botData[dataRow][dataCol] = " " + str(dataVal) + " "
-                            else:
-                                self.botData[dataRow][dataCol] = " " + str(dataVal)
-                        if len(numString) == 1:
-                            self.botData[botRow][botCol] = " " + str(self.numData[j]) + " "
-                            #print self.numData[j]
-                                #self.data[row][col] = " * "
-                        else:
-                            self.botData[botRow][botCol] = str(self.numData[j]) + " "
-                            #print self.numData[j]
-                                #self.data[row][col] = " * "
-                        botChosenValue = self.botData[botRow][botCol]
-                        botFirstChosenNum = chosenValue
-                        botFirstRow = botRow
-                        botFirstColumn = botCol
-                    j += 1
-            print "The bot has chosen its first number."
-            print self
             user_input = raw_input("Please choose a second space to reveal in the format 'row,column'.")
             inputArray = user_input.split(',')
             chosenRow = int(inputArray[0]) - 1
@@ -169,6 +137,16 @@ class Memory:
                         secondColumn = col
                     i += 1
             print self
+            print self
+            if self.checkForPairs(firstChosenNum, secondChosenNum, chosenValue, firstRow, firstColumn, secondRow, secondColumn):
+                if self.checkForEnd():
+                    print "Congratulations!  You won!"
+                    break
+                else:
+                    print "Congratulations, you found a pair!"
+            else:
+                print "Sorry, the two values you chose are not a pair."
+
             self.printBlankBoard()
             botRow = self.generateLocation()
             botCol = self.generateLocation()
@@ -182,33 +160,51 @@ class Memory:
                             dataCol = pair[1]
                             dataVal = pair[2]
                             if len(str(dataVal)) == 1:
-                                self.botData[dataRow][dataCol] = " " + str(dataVal) + " "
+                                self.data[dataRow][dataCol] = " " + str(dataVal) + " "
                             else:
-                                self.botData[dataRow][dataCol] = " " + str(dataVal)
+                                self.data[dataRow][dataCol] = " " + str(dataVal)
                         if len(numString) == 1:
-                            self.botData[botRow][botCol] = " " + str(self.numData[j]) + " "
+                            self.data[botRow][botCol] = " " + str(self.numData[j]) + " "
                             #print self.numData[j]
                                 #self.data[row][col] = " * "
                         else:
-                            self.botData[botRow][botCol] = str(self.numData[j]) + " "
+                            self.data[botRow][botCol] = str(self.numData[j]) + ""
                             #print self.numData[j]
                                 #self.data[row][col] = " * "
-                        botChosenValue = self.botData[botRow][botCol]
-                        botSecondChosenNum = chosenValue
+                        botChosenValue = self.data[botRow][botCol]
+                        botFirstChosenNum = botChosenValue
+                        botFirstRow = botRow
+                        botFirstColumn = botCol
+                    j += 1
+            botRow = self.generateLocation()
+            botCol = self.generateLocation()
+            j = 0
+            for bRow in range(self.colNum):
+                for bCol in range(self.colNum):
+                    if bRow == botRow and bCol == botCol:
+                        for pair in self.botPairs:
+                            #print pair
+                            dataRow = pair[0]
+                            dataCol = pair[1]
+                            dataVal = pair[2]
+                            if len(str(dataVal)) == 1:
+                                self.data[dataRow][dataCol] = " " + str(dataVal) + " "
+                            else:
+                                self.data[dataRow][dataCol] = " " + str(dataVal)
+                        if len(numString) == 1:
+                            self.data[botRow][botCol] = " " + str(self.numData[j]) + " "
+                            #print self.numData[j]
+                                #self.data[row][col] = " * "
+                        else:
+                            self.data[botRow][botCol] = str(self.numData[j]) + " "
+                            #print self.numData[j]
+                                #self.data[row][col] = " * "
+                        botChosenValue = self.data[botRow][botCol]
+                        botSecondChosenNum = botChosenValue
                         botSecondRow = botRow
                         botSecondColumn = botCol
                     j += 1
-            print "The bot has chosen its second number."
             print self
-            if self.checkForPairs(firstChosenNum, secondChosenNum, chosenValue, firstRow, firstColumn, secondRow, secondColumn):
-                if self.checkForEnd():
-                    print "Congratulations!  You won!"
-                    break
-                else:
-                    print "Congratulations, you found a pair!"
-            else:
-                print "Sorry, the two values you chose are not a pair."
-
             if self.checkForBotPairs(botFirstChosenNum, botSecondChosenNum, botChosenValue, botFirstRow, botFirstColumn, botSecondRow, botSecondColumn):
                 if self.checkForBotEnd():
                     print "Sorry!  The bot found all the pairs first!"

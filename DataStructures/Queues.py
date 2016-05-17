@@ -20,7 +20,7 @@ class Queue:
         while len(nameList) > 0:
 
             if i == num
-                
+
             i += 1
 q=Queue()
 q.enqueue(4)
