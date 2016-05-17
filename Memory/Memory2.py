@@ -77,68 +77,48 @@ class Memory:
     def hostGame(self):
         isPlaying = True
         while (isPlaying):
-            print self
-            user_input = raw_input("Please choose a space to reveal in the format 'row,column'.")
-            inputArray = user_input.split(',')
-            chosenRow = int(inputArray[0]) - 1
-            chosenColumn = int(inputArray[1]) - 1
-            numString = str(chosenColumn)
-            #self.data[row][col] = str(self.numData[i]) + " "
-            H = self.colNum
-            W = self.colNum
-            i = 0
-            for row in range(H):
-                for col in range(W):
-                    numString = str(self.numData[i])
-                    if row == chosenRow and col == chosenColumn:
-                        for pair in self.pairs:
-                            #print pair
-                            dataRow = pair[0]
-                            dataCol = pair[1]
-                            dataVal = pair[2]
-                            if len(str(dataVal)) == 1:
-                                self.data[dataRow][dataCol] = " " + str(dataVal) + " "
+            for i in range(2):
+                print self
+                user_input = raw_input("Please choose a space to reveal in the format 'row,column'.")
+                inputArray = user_input.split(',')
+                chosenRow = int(inputArray[0]) - 1
+                chosenColumn = int(inputArray[1]) - 1
+                numString = str(chosenColumn)
+                #self.data[row][col] = str(self.numData[i]) + " "
+                H = self.colNum
+                W = self.colNum
+
+                ChosenNum = []
+                Row = []
+                Col = []
+
+                i = 0
+                for row in range(H):
+                    for col in range(W):
+                        numString = str(self.numData[i])
+                        if row == chosenRow and col == chosenColumn:
+                            for pair in self.pairs:
+                                #print pair
+                                dataRow = pair[0]
+                                dataCol = pair[1]
+                                dataVal = pair[2]
+                                if len(str(dataVal)) == 1:
+                                    self.data[dataRow][dataCol] = " " + str(dataVal) + " "
+                                else:
+                                    self.data[dataRow][dataCol] = " " + str(dataVal)
+                            if len(numString) == 1:
+                                self.data[row][col] = " " + str(self.numData[i]) + " "
+                                #self.data[row][col] = " * "
                             else:
-                                self.data[dataRow][dataCol] = " " + str(dataVal)
-                        if len(numString) == 1:
-                            self.data[row][col] = " " + str(self.numData[i]) + " "
-                            #self.data[row][col] = " * "
-                        else:
-                            self.data[row][col] = str(self.numData[i]) + " "
-                            #self.data[row][col] = " * "
-                        chosenValue = self.data[row][col]
-                        firstChosenNum = chosenValue
-                        firstRow = row
-                        firstColumn = col
-                    i += 1
-            print self
-            user_input = raw_input("Please choose a second space to reveal in the format 'row,column'.")
-            inputArray = user_input.split(',')
-            chosenRow = int(inputArray[0]) - 1
-            chosenColumn = int(inputArray[1]) - 1
-            numString = str(chosenColumn)
-            #self.data[row][col] = str(self.numData[i]) + " "
-            H = self.colNum
-            W = self.colNum
-            i = 0
-            for row in range(H):
-                for col in range(W):
-                    numString = str(self.numData[i])
-                    if row == chosenRow and col == chosenColumn:
-                        if len(numString) == 1:
-                            self.data[row][col] = " " + str(self.numData[i]) + " "
-                            #self.data[row][col] = " * "
-                        else:
-                            self.data[row][col] = str(self.numData[i]) + " "
-                            #self.data[row][col] = " * "
-                        chosenValue = self.data[row][col]
-                        secondChosenNum = chosenValue
-                        secondRow = row
-                        secondColumn = col
-                    i += 1
-            print self
-            print self
-            if self.checkForPairs(firstChosenNum, secondChosenNum, chosenValue, firstRow, firstColumn, secondRow, secondColumn):
+                                self.data[row][col] = str(self.numData[i]) + " "
+                                #self.data[row][col] = " * "
+                            chosenValue = self.data[row][col]
+                            ChosenNum.append(chosenValue)
+                            Row.append(row)
+                            Col.append(col)
+                        i += 1
+                print self
+            if self.checkForPairs(ChosenNum[0], ChosenNum[1], chosenValue, Row[0], Col[0], Row[1], Col[1]):
                 if self.checkForEnd():
                     print "Congratulations!  You won!"
                     break
@@ -179,32 +159,7 @@ class Memory:
                     j += 1
             botRow = self.generateLocation()
             botCol = self.generateLocation()
-            j = 0
-            for bRow in range(self.colNum):
-                for bCol in range(self.colNum):
-                    if bRow == botRow and bCol == botCol:
-                        for pair in self.botPairs:
-                            #print pair
-                            dataRow = pair[0]
-                            dataCol = pair[1]
-                            dataVal = pair[2]
-                            if len(str(dataVal)) == 1:
-                                self.data[dataRow][dataCol] = " " + str(dataVal) + " "
-                            else:
-                                self.data[dataRow][dataCol] = " " + str(dataVal)
-                        if len(numString) == 1:
-                            self.data[botRow][botCol] = " " + str(self.numData[j]) + " "
-                            #print self.numData[j]
-                                #self.data[row][col] = " * "
-                        else:
-                            self.data[botRow][botCol] = str(self.numData[j]) + " "
-                            #print self.numData[j]
-                                #self.data[row][col] = " * "
-                        botChosenValue = self.data[botRow][botCol]
-                        botSecondChosenNum = botChosenValue
-                        botSecondRow = botRow
-                        botSecondColumn = botCol
-                    j += 1
+
             print self
             if self.checkForBotPairs(botFirstChosenNum, botSecondChosenNum, botChosenValue, botFirstRow, botFirstColumn, botSecondRow, botSecondColumn):
                 if self.checkForBotEnd():
@@ -292,4 +247,4 @@ class Memory:
 
 my = Memory()
 
-#print my
+
