@@ -71,10 +71,9 @@ class Memory:
         self.hostGame()
 
     def generateLocation(self):
-<<<<<<< Updated upstream
-=======
+
         #Generate random number for bot
->>>>>>> Stashed changes
+
         location = random.randint(1,self.colNum)
         return location
 
