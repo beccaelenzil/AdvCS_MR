@@ -127,10 +127,6 @@ class Memory:
                             i += 1
                     print self
 
-                print Row
-                print Col
-                print ChosenNum
-
                 #3rd tab in, check for player pairs
                 if self.checkForPairs(ChosenNum[0], ChosenNum[1], chosenValue, Row[0], Col[0], Row[1], Col[1]):
 
@@ -141,17 +137,16 @@ class Memory:
                         print "Congratulations, you found a pair!\n"
                 else:
                     print "Sorry, the two values you chose are not a pair.\n"
-                    #playersTurn = False
-                    #computersTurn = True
+                    playersTurn = False
+                    computersTurn = True
 
 
                 #print "Now it's the computer turn"
                 time.sleep(2)
-                self.printBlankBoard()
                 #print self
-                #self.printBlankBoard()
+                self.printBlankBoard()
 
-            """
+
             while computersTurn:
 
                 botChosenNum = []
@@ -161,13 +156,17 @@ class Memory:
                 #3rd tab in, bot should get two positions
                 for n in range(2):
 
-                    botRow = random.randint(0,self.colNum) #self.generateLocation()
-                    botCol = random.randint(0,self.colNum) #self.generateLocation()
+                    botRow = random.randint(1,self.colNum) #self.generateLocation()
+                    botCol = random.randint(1,self.colNum) #self.generateLocation()
+
+                    H = self.colNum
+                    W = self.colNum
 
                     j = 0
 
                     for bRow in range(H): #this was self.colNum
                         for bCol in range(W): #this was self.rowNum
+                            numString = str(self.numData[j])
                             if bRow == botRow and bCol == botCol:
                                 #printing existing pairs
                                 for pair in self.botPairs:
@@ -195,27 +194,23 @@ class Memory:
 
                             j += 1
 
+                if len(botRowList) == 2:
                     print self
-
-                print botRowList
-                print botColList
-                print botChosenNum
-
-                if self.checkForBotPairs(botChosenNum[0], botChosenNum[1], botRowList[0], botColList[1], botRowList[1], botRowList[1]):
-                    if self.checkForBotEnd():
-                        print "Sorry!  The bot found all the pairs first!\n"
-                        break
+                    self.printBlankBoard()
+                    if self.checkForBotPairs(botChosenNum[0], botChosenNum[1], botRowList[0], botColList[0], botRowList[1], botRowList[1]):
+                        if self.checkForBotEnd():
+                            print "Sorry!  The bot found all the pairs first!\n"
+                            break
+                        else:
+                            print "Oh no!  The bot found a pair!\n"
                     else:
-                        print "Oh no!  The bot found a pair!\n"
-                else:
-                    print "Yay!  The bot did not find a pair!\n"
-                    print "Now it's your turn again"
+                        print "Yay!  The bot did not find a pair!\n"
+                        print "Now it's your turn again"
                     computersTurn = False
                     playersTurn = True
 
 
                 time.sleep(2)
-                """
 
     def checkForPairs(self, p1, p2, chosenVal, row1, col1, row2, col2):
         if p1 == p2:
@@ -286,7 +281,7 @@ class Memory:
                     self.data[row][col] = " * "
                 i += 1
 
-        print self#
+        print self
 
 
 my = Memory()
