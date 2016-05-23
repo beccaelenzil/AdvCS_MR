@@ -50,11 +50,13 @@ class Memory:
         return s
 
     def createBoard(self):
+        #generate random numbers to put in the data array, self.numData
         for i in range((self.colNum * self.colNum) / 2):
             self.numData.append(i)
             self.numData.append(i)
         random.shuffle(self.numData)
         self.botData = self.numData
+        #populate the display array, self.data, with asterisks
         H = self.colNum
         W = self.colNum
         i = 0
@@ -69,6 +71,7 @@ class Memory:
     def generateLocation(self):
 
         #Generate random number for bot
+        #THIS METHOD IS OBSOLETE
 
         location = random.randint(1,self.colNum)
         return location
@@ -77,9 +80,9 @@ class Memory:
         isPlaying = True
         while (isPlaying):
 
-            #human
+            #human logic
             for pair in self.pairs:
-                #print pair
+                #print existing pairs
                 dataRow = pair[0]
                 dataCol = pair[1]
                 dataVal = pair[2]
@@ -114,6 +117,7 @@ class Memory:
                         firstColumn = col
                     i += 1
             print self
+            #user's first choice is printed.  User is then promted to enter their second choice.
             user_input = raw_input("Please choose a second space to reveal in the format 'row,column'.")
             inputArray = user_input.split(',')
             chosenRow = int(inputArray[0]) - 1
@@ -139,6 +143,7 @@ class Memory:
                         secondColumn = col
                     i += 1
             print self
+            #user's second choice is printed.  The game checks if the user found a pair.
             if self.checkForPairs(firstChosenNum, secondChosenNum, firstRow, firstColumn, secondRow, secondColumn):
                 if self.checkForEnd():
                     print "Congratulations!  You won!"
@@ -151,6 +156,8 @@ class Memory:
             time.sleep(2)
             self.printBlankBoard()
 
+
+            #Logic for bot's turn
             for pair in self.pairs:
                 #print pair
                 dataRow = pair[0]
@@ -160,9 +167,8 @@ class Memory:
                     self.data[dataRow][dataCol] = " " + str(dataVal) + " "
                 else:
                     self.data[dataRow][dataCol] = " " + str(dataVal)
-            #print self
 
-            #bot logic
+
             botRow = random.randint(0,self.colNum-1) #self.generateLocation()
             botCol = random.randint(0,self.colNum-1)
             i = 0
@@ -173,6 +179,8 @@ class Memory:
                         firstVal = self.numData[i]
                         break
                     i += 1
+            #Bot randomly generates a row and column, and finds the corresponding value out of the one-dimensional data array, self.numData
+
             #print botRow
             #print botCol
             #print firstVal
@@ -180,8 +188,10 @@ class Memory:
             #for z in range(len(self.numData)):
             #    print self.numData[z]
             #break
+
             botRow2 = random.randint(0,self.colNum-1) #self.generateLocation()
             botCol2 = random.randint(0,self.colNum-1)
+            #Bot randomly generates a second row and column and makes sure that it is different from the first one.
             while (botRow2 == botRow and botCol2 == botCol):
                 botRow2 = random.randint(0,self.colNum-1) #self.generateLocation()
                 botCol2 = random.randint(0,self.colNum-1)
@@ -193,8 +203,10 @@ class Memory:
                         secondVal = self.numData[i]
                         break
                     i += 1
+            #Bot finds corresponding value for the second row and second column
 
             if self.checkForPairs(firstVal, secondVal, botRow, botCol, botRow2, botCol2):
+                #Since the mechanism that checks for wins uses the display array, self.data, we update that here with the latest pairs.
                 for pair in self.pairs:
                     #print pair
                     dataRow = pair[0]
@@ -227,6 +239,7 @@ class Memory:
             return False
 
     def checkForBotPairs(self, p1, p2, row1, col1, row2, col2):
+        #Method is obsolete - this version only uses checkForPairs
         if p1 == p2:
             self.botPairs += [[row1, col1, p1]]
             self.botPairs += [[row2, col2, p2]]
@@ -249,6 +262,7 @@ class Memory:
             return False
 
     def checkForBotEnd(self):
+        #Method is obsolete - this version only uses checkForEnd
         H = self.colNum
         W = self.colNum
         i = 0
@@ -262,6 +276,7 @@ class Memory:
             return False
 
     def printBlankBoard(self):
+        #Resets the display array, self.data
         H = self.colNum
         W = self.colNum
         i = 0
