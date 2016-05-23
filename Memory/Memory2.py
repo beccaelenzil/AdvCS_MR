@@ -169,7 +169,7 @@ class Memory:
                             numString = str(self.numData[j])
                             if bRow == botRow and bCol == botCol:
                                 #printing existing pairs
-                                for pair in self.botPairs:
+                                for pair in self.pairs:
                                     #print pair
                                     dataRow = pair[0]
                                     dataCol = pair[1]
@@ -223,8 +223,8 @@ class Memory:
 
     def checkForBotPairs(self, p1, p2, row1, col1, row2, col2):
         if p1 == p2:
-            self.botPairs += [[row1, col1, p1]]
-            self.botPairs += [[row2, col2, p2]]
+            self.pairs += [[row1, col1, p1]]
+            self.pairs += [[row2, col2, p2]]
             #print self.pairs
             return True
         else:
