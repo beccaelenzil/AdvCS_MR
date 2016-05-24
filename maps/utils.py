@@ -61,9 +61,13 @@ def enumerate(s, start=0):
     >>> enumerate('five', 5)
     [[5, 'f'], [6, 'i'], [7, 'v'], [8, 'e']]
     """
+    startList = []
+    for i in range(len(s)):
+        startList += [start]
+        start += 1
     # BEGIN Question 0
     #"*** REPLACE THIS LINE ***"
-    return zip(s)
+    return zip(startList, s)
     # END Question 0
 
 def distance(pos1, pos2):

@@ -71,6 +71,7 @@ def make_restaurant(name, location, categories, price, reviews):
         'location': location,
         'categories': categories,
         'price': price,
+        'reviews': reviews
     }
 
 def restaurant_name(restaurant):
@@ -94,7 +95,7 @@ def restaurant_ratings(restaurant):
     """Return a list of ratings, which are numbers from 1 to 5, of the
     `restaurant` based on the reviews of the `restaurant`."""
     # BEGIN Question 1
-    "*** REPLACE THIS LINE ***"
+    return restaurant['reviews']
     # END Question 1
 
 
@@ -103,11 +104,18 @@ def restaurant_ratings(restaurant):
 def restaurant_num_ratings(restaurant):
     """Return the number of ratings for `restaurant`."""
     # BEGIN Question 2
-    "*** REPLACE THIS LINE ***"
+    myRatings = restaurant_ratings(restaurant)
+    return len(myRatings)
     # END Question 2
 
 def restaurant_mean_rating(restaurant):
     """Return the average rating for `restaurant`."""
     # BEGIN Question 2
-    "*** REPLACE THIS LINE ***"
+    myRatings = restaurant_ratings(restaurant)
+    sum = 0
+    for i in range(len(myRatings)):
+        sum += myRatings[i]
+
+    average = sum / len(myRatings)
+    return average
     # END Question 2
