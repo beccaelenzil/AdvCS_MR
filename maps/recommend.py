@@ -20,6 +20,7 @@ def find_closest(location, centroids):
     """
     # BEGIN Question 3
     "*** REPLACE THIS LINE ***"
+    return group_by_first([3.0, 4.0])
     # END Question 3
 
 
