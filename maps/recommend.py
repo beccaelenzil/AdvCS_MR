@@ -19,11 +19,13 @@ def find_closest(location, centroids):
     [2.0, 3.0]
     """
     myDistanceArray = []
+    i = 0
     for centroid in centroids:
         myDistanceArray += [distance(centroid, location)]
     # BEGIN Question 3
-    closestCentroid = min(myDistanceArray)
-    return closestCentroid
+    #myDistanceArray = group_by_first(myDistanceArray)
+    closestCentroid = myDistanceArray.index(min(myDistanceArray))
+    return centroids[closestCentroid]
     #return group_by_first([3.0, 4.0])
     # END Question 3
 
@@ -54,10 +56,17 @@ def group_by_centroid(restaurants, centroids):
     """
     # BEGIN Question 4
     clusters = []
+    for j in range(len(centroids)):
+        clusters.append([])
+
     for myRestaurant in restaurants:
-        closentCentroid = find_closest(myRestaurant["location"], centroids)
-        clusters.append(closentCentroid)
-    "*** REPLACE THIS LINE ***"
+        closestCentroid = find_closest(myRestaurant['location'], centroids)
+        i = centroids.index(closestCentroid)
+        clusters[i].append(myRestaurant)
+
+    #restaurantsToReturn = group_by_first(clusters)
+    return clusters
+    #return clusters
     # END Question 4
 
 
@@ -65,7 +74,20 @@ def find_centroid(cluster):
     """Return the centroid of the `cluster` based on the locations of the
     restaurants."""
     # BEGIN Question 5
-    "*** REPLACE THIS LINE ***"
+    restaurantLatitudes = []
+    restaurantLongitudes = []
+    #print(cluster)
+    for myRestaurant in cluster:
+        #print(myRestaurant[0])
+        myRestaurantLocation = myRestaurant['location']
+        #Every restaurant in 'cluster' consists of latitude, longitude pairs
+        restaurantLatitudes.append(myRestaurantLocation[0])
+        restaurantLongitudes.append(myRestaurantLocation[1])
+    centroidLatitude = mean(restaurantLatitudes)
+    centroidLongitude = mean(restaurantLongitudes)
+
+    return [centroidLatitude, centroidLongitude]
+
     # END Question 5
 
 
@@ -79,7 +101,9 @@ def k_means(restaurants, k, max_updates=100):
     while old_centroids != centroids and n < max_updates:
         old_centroids = centroids
         # BEGIN Question 6
-        "*** REPLACE THIS LINE ***"
+        clusters = group_by_centroid(restaurants, centroids)
+        for myCluster in clusters:
+            centroids.append(find_centroid(myCluster))
         # END Question 6
         n += 1
     return centroids
