@@ -137,11 +137,17 @@ def find_predictor(user, restaurants, feature_fn):
         S_yy += (j - ysMean) ** 2
 
     S_xy = 0
-    for k in len(xs):
+    for k in range(len(xs)):
         xMean = (xs[k] - xsMean)
         yMean = (ys[k] - ysMean)
         S_xy += xMean * yMean
+
     b, a, r_squared = 0, 0, 0
+
+    b = S_xy/S_xx
+    a = mean(ys) - b * mean(xs)
+    r_squared = (S_xy ** 2) / (S_xx * S_yy)
+
     # END Question 7
 
     def predictor(restaurant):
@@ -161,7 +167,16 @@ def best_predictor(user, restaurants, feature_fns):
     """
     reviewed = user_reviewed_restaurants(user, restaurants)
     # BEGIN Question 8
-    "*** REPLACE THIS LINE ***"
+    predictorList = []
+    r_squaredList = []
+    for feature_fn in feature_fns:
+        myPredictor, r_squared = find_predictor(user, reviewed, feature_fn)
+        predictorList.append(myPredictor)
+        r_squaredList.append(r_squared)
+
+    predictorIndex = r_squaredList.index(max(r_squaredList))
+
+    return predictorList[predictorIndex]
     # END Question 8
 
 
@@ -176,8 +191,17 @@ def rate_all(user, restaurants, feature_fns):
     """
     predictor = best_predictor(user, ALL_RESTAURANTS, feature_fns)
     reviewed = user_reviewed_restaurants(user, restaurants)
+    myDictionary = {}
     # BEGIN Question 9
-    "*** REPLACE THIS LINE ***"
+    for myRestaurant in restaurants:
+        #add the reviewed restaurants to the dictionary
+        myRestaurantName = myRestaurant['name']
+        if myRestaurant in reviewed:
+            myDictionary[myRestaurantName] = user_rating(user, myRestaurantName)
+        else:
+            myPredictedRating = predictor(myRestaurant)
+            myDictionary[myRestaurantName] = myPredictedRating
+
     # END Question 9
 
 

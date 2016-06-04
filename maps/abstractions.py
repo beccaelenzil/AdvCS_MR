@@ -111,7 +111,11 @@ def restaurant_num_ratings(restaurant):
 def restaurant_mean_rating(restaurant):
     """Return the average rating for `restaurant`."""
     # BEGIN Question 2
-    myRatings = restaurant_ratings(restaurant)
+    myListOfRatings = restaurant_ratings(restaurant)
+    myRatings = []
+    for rating in myListOfRatings:
+        myRatings.append(rating[1])
+    print(myRatings)
     sum = 0
     for i in range(len(myRatings)):
         sum += myRatings[i]
