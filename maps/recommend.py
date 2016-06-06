@@ -202,6 +202,8 @@ def rate_all(user, restaurants, feature_fns):
             myPredictedRating = predictor(myRestaurant)
             myDictionary[myRestaurantName] = myPredictedRating
 
+    return myDictionary
+
     # END Question 9
 
 
@@ -213,7 +215,14 @@ def search(query, restaurants):
     restaurants -- A sequence of restaurants
     """
     # BEGIN Question 10
-    "*** REPLACE THIS LINE ***"
+    restaurantsToReturn = []
+    for myRestaurant in restaurants:
+        myCategories = myRestaurant['categories']
+        if query in myCategories:
+            restaurantsToReturn.append(myRestaurant)
+
+    return restaurantsToReturn
+
     # END Question 10
 
 
